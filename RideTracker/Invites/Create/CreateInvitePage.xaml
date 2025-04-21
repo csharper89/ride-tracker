@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="RideTracker.Invites.CreateInvitePage"
+             xmlns:lang="clr-namespace:RideTracker.Resources.Languages"
+             Title="{x:Static lang:AppResources.Invites_CreateInvitePageTitle}">
+    <VerticalStackLayout>
+        <HorizontalStackLayout>
+            <CheckBox VerticalOptions="Center" IsChecked="{Binding IsAdmin}" />
+        <Label VerticalOptions="Center" Text="{x:Static lang:AppResources.Invites_IsAdmin}" />
+        </HorizontalStackLayout>
+        
+        <Button Text="{x:Static lang:AppResources.Invites_CreateInviteButtonText}" Command="{Binding CreateInviteCommand}" />
+        <Label HorizontalOptions="Center"  FontSize="Large" CharacterSpacing="5" Text="{Binding InviteCode}" IsVisible="{Binding IsCodeVisible}" />
+        <Label Text="{x:Static lang:AppResources.Invites_HelpTextForCode}" IsVisible="{Binding IsCodeVisible}" />
+    </VerticalStackLayout>
+</ContentPage>

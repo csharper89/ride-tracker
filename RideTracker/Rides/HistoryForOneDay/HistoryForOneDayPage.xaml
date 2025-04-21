@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:local="clr-namespace:RideTracker.Rides.HistoryForOneDay"
+             xmlns:lang="clr-namespace:RideTracker.Resources.Languages"
+             xmlns:history="clr-namespace:RideTracker.Rides.History"
+             x:Class="RideTracker.Rides.History.HistoryForOneDayPage"     
+             x:DataType="history:RideHistoryViewModel"
+             Title="{Binding DateFormatted, Mode=OneWay}">
+    <ContentPage.ToolbarItems>
+        <ToolbarItem>
+            <ToolbarItem.IconImageSource>
+                <FontImageSource Glyph="↻" Color="Black"
+                         FontFamily="Segoe MDL2 Assets"
+                         Size="24"/>
+            </ToolbarItem.IconImageSource>
+            <ToolbarItem.Command>
+                <Binding Path="RefreshCommand"/>
+            </ToolbarItem.Command>
+        </ToolbarItem>
+    </ContentPage.ToolbarItems>
+    <ScrollView>
+        <VerticalStackLayout>
+            <ActivityIndicator IsVisible="{Binding IsBusy}" IsRunning="{Binding IsBusy}"></ActivityIndicator>
+            <CollectionView ItemsSource="{Binding RideSummaries}" SelectionMode="None">
+                <CollectionView.ItemsLayout>
+                    <LinearItemsLayout Orientation="Vertical" ItemSpacing="5"/>
+                </CollectionView.ItemsLayout>
+                <CollectionView.ItemTemplate>
+                    <DataTemplate x:DataType="local:RideSummary">
+                        <Border Stroke="Gray" StrokeThickness="1" Padding="10" BackgroundColor="White"
+                    StrokeShape="RoundRectangle 10"
+                    HorizontalOptions="Fill">
+                            <Grid ColumnDefinitions="*,Auto" RowDefinitions="Auto,Auto" HorizontalOptions="Fill">
+                                <Label Text="{Binding NameAndTime, Mode=OneTime}" FontSize="16" TextColor="Black" Grid.Row="0" Grid.Column="0"/>
+                                <Label Text="{Binding DetailedCost, Mode=OneTime}" FontSize="14" TextColor="Gray" Grid.Row="1" Grid.Column="0"/>
+
+                                <BoxView WidthRequest="12" HeightRequest="12"
+                             CornerRadius="6"
+                             VerticalOptions="Center"
+                             BackgroundColor="Transparent"
+                             HorizontalOptions="End"
+                             Color="{Binding SynchronizationIndicatorColor, Mode=OneTime}"
+                             Grid.RowSpan="2" Grid.Column="1"/>
+                            </Grid>
+                            <Border.GestureRecognizers >
+                                <TapGestureRecognizer x:DataType="{x:Null}" Command="{Binding Source={RelativeSource AncestorType={x:Type ContentPage}}, Path=BindingContext.OpenRideDetailsCommand}"  CommandParameter="{Binding .}"/>
+                            </Border.GestureRecognizers>
+                        </Border>
+                    </DataTemplate>
+                </CollectionView.ItemTemplate>
+            </CollectionView>
+            <HorizontalStackLayout HorizontalOptions="End" Spacing="10">
+                <Label FontSize="Large" Text="{x:Static lang:AppResources.History_TotalSum}"></Label>
+                <Label FontSize="Large" Text="{Binding Sum}"></Label>
+            </HorizontalStackLayout>
+        </VerticalStackLayout>
+    </ScrollView>
+</ContentPage>

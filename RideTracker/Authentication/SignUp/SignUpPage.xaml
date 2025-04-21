@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:lang="clr-namespace:RideTracker.Resources.Languages"
+             x:Class="RideTracker.Pages.SignUpPage"
+             Title="{x:Static lang:AppResources.SignUp_PageTitle}">
+    <VerticalStackLayout>
+        <Entry Text="{Binding Email}" Placeholder="{x:Static lang:AppResources.SignUp_Email}" />
+        <Label Style="{StaticResource ErrorMessage}" Text="{Binding EmailError}" IsVisible="{Binding EmailError, Converter={StaticResource StringToVisibilityConverter}}" />
+
+        <Entry Text="{Binding Password}" IsPassword="True" Placeholder="{x:Static lang:AppResources.SignUp_Password}" />
+        <Entry Text="{Binding PasswordRetyped}" IsPassword="True" Placeholder="{x:Static lang:AppResources.SignUp_RepeatPassword}" />
+        <Label Style="{StaticResource ErrorMessage}" Text="{Binding PasswordError}" IsVisible="{Binding PasswordError, Converter={StaticResource StringToVisibilityConverter}}" />
+
+        <Button Command="{Binding SignUpCommand}" Text="{x:Static lang:AppResources.SignUp_DoSignUp}" />
+        <Label Style="{StaticResource ErrorMessage}" Text="{Binding SignUpError}" IsVisible="{Binding SignUpError, Converter={StaticResource StringToVisibilityConverter}}" />
+    </VerticalStackLayout>
+</ContentPage>

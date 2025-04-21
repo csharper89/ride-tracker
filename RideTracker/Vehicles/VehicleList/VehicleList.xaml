@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:local="clr-namespace:RideTracker.Vehicles.VehicleList"
+             xmlns:lang="clr-namespace:RideTracker.Resources.Languages"
+             xmlns:utils="clr-namespace:RideTracker.Utilities"
+             xmlns:vehicles="clr-namespace:RideTracker.Vehicles"
+             x:DataType="local:VehicleListModel"
+             x:Class="RideTracker.Vehicles.VehicleList.VehicleListPage"
+             Title="{x:Static lang:AppResources.Vehicles_ListPageTitle}">
+
+    <ContentPage.ToolbarItems>
+        <ToolbarItem>
+            <ToolbarItem.IconImageSource>
+                <FontImageSource Glyph="↻" Color="Black"
+                             FontFamily="Segoe MDL2 Assets"
+                             Size="24"/>
+            </ToolbarItem.IconImageSource>
+            <ToolbarItem.Command>
+                <Binding Path="RefreshCommand"/>
+            </ToolbarItem.Command>
+        </ToolbarItem>
+        <ToolbarItem>
+            <ToolbarItem.IconImageSource>
+                <FontImageSource Glyph="+"  Color="Black"
+                     FontFamily="Segoe MDL2 Assets"
+                     Size="24"/>
+            </ToolbarItem.IconImageSource>
+            <ToolbarItem.Command>
+                <Binding Path="CreateVehicleCommand"/>
+            </ToolbarItem.Command>
+        </ToolbarItem>
+        
+    </ContentPage.ToolbarItems>
+    <ScrollView>
+    <VerticalStackLayout Padding="5" Spacing="5" BackgroundColor="Transparent">
+            <ActivityIndicator IsRunning="{Binding IsBusy}" IsVisible="{Binding IsBusy}"></ActivityIndicator>
+        <CollectionView BackgroundColor="Transparent" ItemsSource="{Binding Vehicles}">
+            <CollectionView.ItemsLayout>
+                <LinearItemsLayout Orientation="Vertical" ItemSpacing="10"/>
+            </CollectionView.ItemsLayout>
+            <CollectionView.ItemTemplate>
+            <DataTemplate x:DataType="local:VehicleModel">
+                    <Border BackgroundColor="Transparent">
+                        <VerticalStackLayout HorizontalOptions="Fill" BackgroundColor="Transparent">
+                                <Grid HorizontalOptions="Fill" BackgroundColor="Transparent">
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="*" />
+                                        <ColumnDefinition Width="*" />
+                                    </Grid.ColumnDefinitions>
+                                    <Label Text="{Binding Name}" Grid.Column="0" FontAttributes="Bold" FontSize="Medium" HorizontalOptions="Start" VerticalOptions="Center">
+                                        <Label.GestureRecognizers>
+                                            <TapGestureRecognizer x:DataType="{x:Null}" Command="{Binding Source={RelativeSource AncestorType={x:Type ContentPage}}, Path=BindingContext.OpenVehicleDetailsCommand}" CommandParameter="{Binding Id}"></TapGestureRecognizer>
+                                        </Label.GestureRecognizers>
+                                    </Label>
+                                    <Label Text="{Binding ElapsedTime}" Grid.Column="1" FontAttributes="Bold" FontSize="Medium" HorizontalOptions="End" VerticalOptions="Center"/>
+                                </Grid>
+                                <Grid ColumnSpacing="5" BackgroundColor="Transparent" x:DataType="{x:Null}">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="2*" />
+                                <ColumnDefinition Width="1*" />
+                            </Grid.ColumnDefinitions>
+                                    <Grid>
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="*" />
+                                            <ColumnDefinition Width="*" />
+                                        </Grid.ColumnDefinitions>
+
+                                        <!-- First button in the first column -->
+                                        <Button Grid.Column="0"
+                BackgroundColor="LightGreen" Text="{x:Static lang:AppResources.Vehicle_StartRide}"
+                Margin="0,0,5,0"
+                Command="{Binding Source={RelativeSource AncestorType={x:Type ContentPage}}, Path=BindingContext.StartRideCommand}" 
+                CommandParameter="{Binding Id}"
+                HorizontalOptions="Fill"
+                Padding="10"/>
+
+                                        <!-- Second button in the second column -->
+                                        <Button Grid.Column="1"
+                BackgroundColor="LightCoral" Text="{x:Static lang:AppResources.Vehicle_StopRide}"
+                Margin="5,0,0,0"
+                Command="{Binding Source={RelativeSource AncestorType={x:Type ContentPage}}, Path=BindingContext.StopRideCommand}" 
+                CommandParameter="{Binding Id}"
+                HorizontalOptions="Fill"
+                Padding="10"/>
+                                    </Grid>
+
+                                    <Grid ColumnDefinitions="*,*" ColumnSpacing="5" Grid.Column="1">
+                                        <Button Grid.Column="0" Text="{Binding QuickSaveButton1}"
+                                            IsEnabled="{Binding CanDoQuickSave}"
+                                            Command="{Binding Source={RelativeSource AncestorType={x:Type ContentPage}}, Path=BindingContext.QuickSave1Command}" 
+                                            CommandParameter="{Binding Id}"></Button>
+                                        <Button Grid.Column="1" Text="{Binding QuickSaveButton2}" 
+                                            IsEnabled="{Binding CanDoQuickSave}"
+                                            Command="{Binding Source={RelativeSource AncestorType={x:Type ContentPage}}, Path=BindingContext.QuickSave2Command}" Padding="0"
+                                            CommandParameter="{Binding Id}"></Button>
+                                    </Grid>
+                                </Grid>
+                    </VerticalStackLayout>
+                </Border>
+            </DataTemplate>
+            </CollectionView.ItemTemplate>
+        </CollectionView>
+
+        <Button Text="{x:Static lang:AppResources.Vehicles_GoToHistory}" Command="{Binding GoToHistoryPageCommand}" />
+    </VerticalStackLayout>
+    </ScrollView>
+</ContentPage>

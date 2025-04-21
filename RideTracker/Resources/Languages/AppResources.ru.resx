@@ -1,0 +1,312 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <!-- 
+    Microsoft ResX Schema 
+    
+    Version 2.0
+    
+    The primary goals of this format is to allow a simple XML format 
+    that is mostly human readable. The generation and parsing of the 
+    various data types are done through the TypeConverter classes 
+    associated with the data types.
+    
+    Example:
+    
+    ... ado.net/XML headers & schema ...
+    <resheader name="resmimetype">text/microsoft-resx</resheader>
+    <resheader name="version">2.0</resheader>
+    <resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
+    <resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
+    <data name="Name1"><value>this is my long string</value><comment>this is a comment</comment></data>
+    <data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
+    <data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
+        <value>[base64 mime encoded serialized .NET Framework object]</value>
+    </data>
+    <data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+        <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
+        <comment>This is a comment</comment>
+    </data>
+                
+    There are any number of "resheader" rows that contain simple 
+    name/value pairs.
+    
+    Each data row contains a name, and value. The row also contains a 
+    type or mimetype. Type corresponds to a .NET class that support 
+    text/value conversion through the TypeConverter architecture. 
+    Classes that don't support this are serialized and stored with the 
+    mimetype set.
+    
+    The mimetype is used for serialized objects, and tells the 
+    ResXResourceReader how to depersist the object. This is currently not 
+    extensible. For a given mimetype the value must be set accordingly:
+    
+    Note - application/x-microsoft.net.object.binary.base64 is the format 
+    that the ResXResourceWriter will generate, however the reader can 
+    read any of the formats listed below.
+    
+    mimetype: application/x-microsoft.net.object.binary.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
+            : and then encoded with base64 encoding.
+    
+    mimetype: application/x-microsoft.net.object.soap.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
+            : and then encoded with base64 encoding.
+
+    mimetype: application/x-microsoft.net.object.bytearray.base64
+    value   : The object must be serialized into a byte array 
+            : using a System.ComponentModel.TypeConverter
+            : and then encoded with base64 encoding.
+    -->
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="Alert_No" xml:space="preserve">
+    <value>Нет</value>
+  </data>
+  <data name="Alert_Yes" xml:space="preserve">
+    <value>Да</value>
+  </data>
+  <data name="Error_SomethingWentWrong" xml:space="preserve">
+    <value>Что-то пошло не так</value>
+  </data>
+  <data name="Groups_CreateNew" xml:space="preserve">
+    <value>Создать группу</value>
+  </data>
+  <data name="Groups_DeleteButtonTitle" xml:space="preserve">
+    <value>Удалить</value>
+  </data>
+  <data name="Groups_DetailsPageTitle" xml:space="preserve">
+    <value>Группа машинок</value>
+  </data>
+  <data name="Groups_GroupNamePlaceholder" xml:space="preserve">
+    <value>Название группы</value>
+  </data>
+  <data name="Groups_IHaveCode" xml:space="preserve">
+    <value>У меня есть код</value>
+  </data>
+  <data name="Groups_InviteButtonTitle" xml:space="preserve">
+    <value>Пригласить работника</value>
+  </data>
+  <data name="Groups_MakeCurrent" xml:space="preserve">
+    <value>Перейти в эту группу</value>
+  </data>
+  <data name="Groups_NoGroupsDescription" xml:space="preserve">
+    <value>Если вам выдали код, нажмите кнопку "Уменя есть код"</value>
+  </data>
+  <data name="Groups_PageTitle" xml:space="preserve">
+    <value>Группы</value>
+  </data>
+  <data name="History_DaysSummaryPageTitle" xml:space="preserve">
+    <value>История</value>
+  </data>
+  <data name="History_TotalSum" xml:space="preserve">
+    <value>Итого:</value>
+  </data>
+  <data name="Invites_ActivateButtonTitle" xml:space="preserve">
+    <value>Активировать</value>
+  </data>
+  <data name="Invites_ActivatePageTitle" xml:space="preserve">
+    <value>Активация кода</value>
+  </data>
+  <data name="Invites_ActivationError" xml:space="preserve">
+    <value>Не удалось активировать код. Проверьте правильность кода. Также помните,что код должен быть активирован в течение 48  часов.</value>
+  </data>
+  <data name="Invites_CodeLabel" xml:space="preserve">
+    <value>Код</value>
+  </data>
+  <data name="Invites_CreateInviteButtonText" xml:space="preserve">
+    <value>Создать приглашение</value>
+  </data>
+  <data name="Invites_CreateInvitePageTitle" xml:space="preserve">
+    <value>Приглашение</value>
+  </data>
+  <data name="Invites_HelpTextForCode" xml:space="preserve">
+    <value>Передайте этот код работнику. Он должен нажать кнопку "Уменя есть код" на странице Группы и ввести его. Код действителен в течение 48 часов.</value>
+  </data>
+  <data name="Invites_IsAdmin" xml:space="preserve">
+    <value>Дать права администратора. Пользователь сможет изменять данные машинок, такие как название, цена и т.д.</value>
+  </data>
+  <data name="Minutes" xml:space="preserve">
+    <value>мин.</value>
+  </data>
+  <data name="RideDetails_CancellationConfirmation" xml:space="preserve">
+    <value>Выйти без сохранения?</value>
+  </data>
+  <data name="RideDetails_ConfirmDeleteMessage" xml:space="preserve">
+    <value>Удалить эту поездку?</value>
+  </data>
+  <data name="RideDetails_ConfirmDeleteTitle" xml:space="preserve">
+    <value>Удаление</value>
+  </data>
+  <data name="RideDetails_Cost" xml:space="preserve">
+    <value>Сумма: </value>
+  </data>
+  <data name="RideDetails_Currency" xml:space="preserve">
+    <value> р.</value>
+  </data>
+  <data name="RideDetails_DeleteButtonTitle" xml:space="preserve">
+    <value>Удалить</value>
+  </data>
+  <data name="RideDetails_PageTitle" xml:space="preserve">
+    <value>Сохранить поездку</value>
+  </data>
+  <data name="RideDetails_Price" xml:space="preserve">
+    <value>Цена за {0} минут</value>
+  </data>
+  <data name="RideDetails_RideDuration" xml:space="preserve">
+    <value>Время (мин.)</value>
+  </data>
+  <data name="RideDetails_VehicleName" xml:space="preserve">
+    <value>Название машинки</value>
+  </data>
+  <data name="SaveButtonTitle" xml:space="preserve">
+    <value>Сохранить</value>
+  </data>
+  <data name="SignIn_Email" xml:space="preserve">
+    <value>Email</value>
+  </data>
+  <data name="SignIn_FailedToLogin" xml:space="preserve">
+    <value>Не удалось войти</value>
+  </data>
+  <data name="SignIn_NoAccount" xml:space="preserve">
+    <value>Уменя нет аккаунта</value>
+  </data>
+  <data name="SignIn_PageTitle" xml:space="preserve">
+    <value>Вход в аккаунт</value>
+  </data>
+  <data name="SignIn_Password" xml:space="preserve">
+    <value>Пароль</value>
+  </data>
+  <data name="SignIn_SignIn" xml:space="preserve">
+    <value>Войти</value>
+  </data>
+  <data name="SignUp_DoSignUp" xml:space="preserve">
+    <value>Зарегистрироваться</value>
+  </data>
+  <data name="SignUp_Email" xml:space="preserve">
+    <value>Email</value>
+  </data>
+  <data name="SignUp_EmailIsEmpty" xml:space="preserve">
+    <value>Email не может быть пустым</value>
+  </data>
+  <data name="SignUp_InvalidEmail" xml:space="preserve">
+    <value>Неверный формат Email'a</value>
+  </data>
+  <data name="SignUp_PageTitle" xml:space="preserve">
+    <value>Регистрация</value>
+  </data>
+  <data name="SignUp_Password" xml:space="preserve">
+    <value>Пароль</value>
+  </data>
+  <data name="SignUp_PasswordIsEmpty" xml:space="preserve">
+    <value>Пароль не может быть пустым</value>
+  </data>
+  <data name="SignUp_PasswordsDontMatch" xml:space="preserve">
+    <value>Пароли не совпадают!</value>
+  </data>
+  <data name="SignUp_RepeatPassword" xml:space="preserve">
+    <value>Пароль ещё раз</value>
+  </data>
+  <data name="SignUp_WeakPassword" xml:space="preserve">
+    <value>Минимальная длина пароля - 6 символов</value>
+  </data>
+  <data name="Vehicles_Delete" xml:space="preserve">
+    <value>Удалить</value>
+  </data>
+  <data name="Vehicles_DeleteConfirmationMessage" xml:space="preserve">
+    <value>Удалить эту машинку?</value>
+  </data>
+  <data name="Vehicles_DeleteConfirmationTitle" xml:space="preserve">
+    <value>Удаление</value>
+  </data>
+  <data name="Vehicles_DetailsPageTitle" xml:space="preserve">
+    <value>Редактирование</value>
+  </data>
+  <data name="Vehicles_GoToHistory" xml:space="preserve">
+    <value>История</value>
+  </data>
+  <data name="Vehicles_ListPageTitle" xml:space="preserve">
+    <value>Машинки</value>
+  </data>
+  <data name="Vehicles_Price" xml:space="preserve">
+    <value>Цена за {0} минут</value>
+  </data>
+  <data name="Vehicles_QuickSaveButtonsLabel" xml:space="preserve">
+    <value>Кнопки быстрого сохранения</value>
+  </data>
+  <data name="Vehicles_Save" xml:space="preserve">
+    <value>Сохранить</value>
+  </data>
+  <data name="Vehicles_UnitOfTime" xml:space="preserve">
+    <value>Мин. количество минут</value>
+  </data>
+  <data name="Vehicles_VehicleName" xml:space="preserve">
+    <value>Название</value>
+  </data>
+  <data name="Vehicle_StartRide" xml:space="preserve">
+    <value>Старт</value>
+  </data>
+  <data name="Vehicle_StopRide" xml:space="preserve">
+    <value>Стоп</value>
+  </data>
+  <data name="Warning" xml:space="preserve">
+    <value>ВНИМАНИЕ!</value>
+  </data>
+</root>

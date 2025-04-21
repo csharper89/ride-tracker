@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="RideTracker.Rides.Details.RideDetailsPage"
+             xmlns:lang="clr-namespace:RideTracker.Resources.Languages"
+             Title="{Binding VehicleName}">
+    <Shell.BackButtonBehavior>
+        <BackButtonBehavior IsVisible="False"/>
+    </Shell.BackButtonBehavior>
+    
+    <VerticalStackLayout Spacing="20" Padding="10">
+        <VerticalStackLayout>
+            <Label Text="{x:Static lang:AppResources.RideDetails_RideDuration}" />
+            <Entry Placeholder="{x:Static lang:AppResources.RideDetails_RideDuration}" Text="{Binding RideDurationInMinutes}" Keyboard="Numeric" />
+        </VerticalStackLayout>
+
+        <VerticalStackLayout>
+            <Label Text="{Binding PricePerUnitOfTimeLabel}" />
+            <Entry Placeholder="{Binding PricePerUnitOfTimeLabel}" Text="{Binding PricePerUnitOfTime}" Keyboard="Numeric" />
+        </VerticalStackLayout>
+
+        <HorizontalStackLayout>
+            <Label Text="{x:Static lang:AppResources.RideDetails_Cost}" />
+            <Label Text="{Binding Cost}" />
+            <Label Text="{x:Static lang:AppResources.RideDetails_Currency}" />
+        </HorizontalStackLayout>
+        <Button Text="{x:Static lang:AppResources.SaveButtonTitle}" Command="{Binding SaveCommand}"></Button>
+        <Button Text="{x:Static lang:AppResources.RideDetails_DeleteButtonTitle}" IsVisible="{Binding CanDelete}" Command="{Binding DeleteCommand}"></Button>
+    </VerticalStackLayout>
+</ContentPage>

@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
+             xmlns:lang="clr-namespace:RideTracker.Resources.Languages"
+             x:Class="RideTracker.Groups.List.GroupsListPage"
+             Title="{x:Static lang:AppResources.Groups_PageTitle}">
+    <ScrollView>
+        <VerticalStackLayout>
+            
+            <CollectionView ItemsSource="{Binding Groups}" SelectionMode="Single" SelectionChangedCommand="{Binding OpenGroupDetailsCommand}" SelectedItem="{Binding SelectedGroup}">
+                <CollectionView.ItemTemplate>
+                    <DataTemplate>
+                        <StackLayout>
+                            <Border Background="{Binding BackgroundColor}" Margin="2,5">
+                                <Label Text="{Binding Name}" />
+                            </Border>                        
+                        </StackLayout>
+                    </DataTemplate>
+                </CollectionView.ItemTemplate>
+            </CollectionView>
+
+            <Label IsVisible="{Binding NoGroupsAvailable}" Text="{x:Static lang:AppResources.Groups_NoGroupsDescription}"></Label>
+            <Button Text="{x:Static lang:AppResources.Groups_CreateNew}" Command="{Binding GoToCreateGroupPageCommand}" />
+            <Button Text="{x:Static lang:AppResources.Groups_IHaveCode}" Command="{Binding GoToActivateInvitePageCommand}" />
+            
+        </VerticalStackLayout>
+    </ScrollView>
+</ContentPage>

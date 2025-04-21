@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:lang="clr-namespace:RideTracker.Resources.Languages"
+             x:Class="RideTracker.Vehicles.VehicleDetails.VehicleDetailsPage"
+             Title="{x:Static lang:AppResources.Vehicles_DetailsPageTitle}">
+    <VerticalStackLayout Spacing="10">
+        <StackLayout>
+            <Label FontSize="Micro" Text="{x:Static lang:AppResources.Vehicles_VehicleName}"></Label>
+            <Entry Text="{Binding Name}" />
+        </StackLayout>
+
+        <StackLayout>
+            <Label FontSize="Micro" Text="{x:Static lang:AppResources.Vehicles_UnitOfTime}"></Label>
+            <Entry Text="{Binding UnitOfTime}" Keyboard="Numeric"  />
+        </StackLayout>
+
+        <StackLayout>
+            <Label FontSize="Micro" Text="{Binding PricePerUnitOfTimeLabel}"></Label>
+            <Entry Text="{Binding PricePerUnitOfTime}" Keyboard="Numeric" />
+        </StackLayout>
+
+        <StackLayout>
+            <Label FontSize="Micro" Text="{x:Static lang:AppResources.Vehicles_QuickSaveButtonsLabel}"></Label>
+            <HorizontalStackLayout Spacing="20">
+                <Entry Text="{Binding QuickSaveButton1}" Keyboard="Numeric" />                    
+                <Entry Text="{Binding QuickSaveButton2}" Keyboard="Numeric" />                    
+            </HorizontalStackLayout>            
+        </StackLayout>
+
+        <Button Text="{x:Static lang:AppResources.Vehicles_Save}" Command="{Binding SaveCommand}" />
+        <Button Text="{x:Static lang:AppResources.Vehicles_Delete}" Command="{Binding DeleteCommand}" />
+    </VerticalStackLayout>
+</ContentPage>

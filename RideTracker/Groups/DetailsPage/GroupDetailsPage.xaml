@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="RideTracker.Groups.Details.GroupDetailsPage"
+             xmlns:lang="clr-namespace:RideTracker.Resources.Languages"
+             Title="{x:Static lang:AppResources.Groups_DetailsPageTitle}">
+
+    <VerticalStackLayout Spacing="10">
+        <Entry Text="{Binding Name}" Placeholder="{x:Static lang:AppResources.Groups_GroupNamePlaceholder}" IsEnabled="{Binding IsEditMode}" />
+        <Button Text="{x:Static lang:AppResources.SaveButtonTitle}" Command="{Binding SaveCommand}" />
+        <Button Text="{x:Static lang:AppResources.Groups_MakeCurrent}" Command="{Binding MakeCurrentCommand}" />
+        <Button Text="{x:Static lang:AppResources.Groups_InviteButtonTitle}" Command="{Binding InviteEmployeeCommand}" />        
+        <Button Text="{x:Static lang:AppResources.Groups_DeleteButtonTitle}" Command="{Binding DeleteCommand}" />
+        <ActivityIndicator IsRunning="{Binding IsBusy}" IsVisible="{Binding IsBusy}" />
+    </VerticalStackLayout>
+    
+</ContentPage>

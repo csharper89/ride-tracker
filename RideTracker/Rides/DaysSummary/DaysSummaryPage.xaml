@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="RideTracker.Rides.ListOfDays.DaysSummaryPage"
+             xmlns:lang="clr-namespace:RideTracker.Resources.Languages"
+             xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
+             Title="{x:Static lang:AppResources.History_DaysSummaryPageTitle}">
+    <ContentPage.ToolbarItems>
+        <ToolbarItem>
+            <ToolbarItem.IconImageSource>
+                <FontImageSource Glyph="↻" Color="Black"
+                     FontFamily="Segoe MDL2 Assets"
+                     Size="24"/>
+            </ToolbarItem.IconImageSource>
+            <ToolbarItem.Command>
+                <Binding Path="RefreshCommand"/>
+            </ToolbarItem.Command>
+        </ToolbarItem>
+    </ContentPage.ToolbarItems>
+    <ScrollView>
+        <VerticalStackLayout>
+            <ActivityIndicator IsVisible="{Binding IsBusy}" IsRunning="{Binding IsBusy}"></ActivityIndicator>
+            <CollectionView Margin="5" ItemsSource="{Binding Summaries}" SelectionMode="None">
+                <CollectionView.ItemsLayout>
+                    <LinearItemsLayout Orientation="Vertical" ItemSpacing="10"/>
+                </CollectionView.ItemsLayout>
+                <CollectionView.ItemTemplate>
+                    <DataTemplate>
+                        <Border Stroke="Gray" StrokeThickness="1" Padding="10" BackgroundColor="White" StrokeShape="RoundRectangle 10">
+                            <Grid ColumnDefinitions="*,Auto">
+                                <Label Text="{Binding DateString}" 
+                           VerticalOptions="Center"
+                           FontSize="16" 
+                           TextColor="Black"/>
+
+                                <Label Text="{Binding TotalSumForDay}" 
+                           VerticalOptions="Center"
+                           FontSize="16" 
+                           TextColor="Black"
+                           FontAttributes="Bold"
+                           Grid.Column="1"/>
+
+                                <Grid.GestureRecognizers>
+                                    <TapGestureRecognizer
+                                Command="{Binding Source={RelativeSource AncestorType={x:Type ContentPage}}, Path=BindingContext.OpenHistoryForOneDayCommand}" 
+                                CommandParameter="{Binding .}"/>
+                                </Grid.GestureRecognizers>
+                            </Grid>
+                        </Border>
+                    </DataTemplate>
+                </CollectionView.ItemTemplate>
+            </CollectionView>
+        </VerticalStackLayout>
+    </ScrollView>
+
+</ContentPage>

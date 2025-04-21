@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<Shell
+    x:Class="RideTracker.AppShell"
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:sf="clr-namespace:Syncfusion.Maui.Toolkit.SegmentedControl;assembly=Syncfusion.Maui.Toolkit"
+    xmlns:pages="clr-namespace:RideTracker.Pages"
+    xmlns:vehicleList="clr-namespace:RideTracker.Vehicles.VehicleList"
+    xmlns:groupList="clr-namespace:RideTracker.Groups.List"
+    xmlns:groupDetails="clr-namespace:RideTracker.Groups.Details"
+    xmlns:lang="clr-namespace:RideTracker.Resources.Languages"
+    Shell.FlyoutBehavior="Flyout"
+    Title="RideTracker">
+
+    <ShellContent Title="{x:Static lang:AppResources.Vehicles_ListPageTitle}" Route="VehicleListPage" ContentTemplate="{DataTemplate vehicleList:VehicleListPage}" />
+    <ShellContent Route="GroupsListPage" Title="{x:Static lang:AppResources.Groups_PageTitle}" ContentTemplate="{DataTemplate groupList:GroupsListPage}" />
+
+</Shell>
