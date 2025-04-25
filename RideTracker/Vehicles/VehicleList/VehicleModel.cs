@@ -104,4 +104,12 @@ public partial class VehicleModel : ObservableObject
 
         EstimatedRideTimeInMinutes += minutes;
     }
+
+    public void RestoreState(VehicleModel model)
+    {
+        EstimatedRideTimeInMinutes = model.EstimatedRideTimeInMinutes;
+        RideStartedAtUtc = model.RideStartedAtUtc;
+        _notifiedAboutTimeIsUp = model._notifiedAboutTimeIsUp;
+        CanDoQuickSave = model.CanDoQuickSave;
+    }
 }

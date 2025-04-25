@@ -291,6 +291,9 @@
   <data name="Vehicles_QuickSaveButtonsLabel" xml:space="preserve">
     <value>Кнопки быстрого сохранения</value>
   </data>
+  <data name="Vehicles_RideSaved" xml:space="preserve">
+    <value>Поездка сохранена</value>
+  </data>
   <data name="Vehicles_Save" xml:space="preserve">
     <value>Сохранить</value>
   </data>

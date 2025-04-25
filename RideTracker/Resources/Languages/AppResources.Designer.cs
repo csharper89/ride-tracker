@@ -601,6 +601,15 @@ namespace RideTracker.Resources.Languages {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Ride saved.
+        /// </summary>
+        internal static string Vehicles_RideSaved {
+            get {
+                return ResourceManager.GetString("Vehicles_RideSaved", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Save.
         /// </summary>
         internal static string Vehicles_Save {

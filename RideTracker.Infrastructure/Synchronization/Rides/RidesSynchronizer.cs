@@ -46,6 +46,7 @@ public class RidesSynchronizer : EntitySynchronizer<Ride, RideResponse>
             RideDurationInMinutes = rideResponse.RideDurationInMinutes,
             PricePerUnitOfTime = rideResponse.PricePerUnitOfTime,
             UnitOfTimeInMinutes = rideResponse.UnitOfTimeInMinutes,
+            DeletedAt = rideResponse.DeletedAt,
             Cost = rideResponse.Cost,
             CreatedAt = rideResponse.CreatedAt,
             StartedAt = rideResponse.StartedAt,

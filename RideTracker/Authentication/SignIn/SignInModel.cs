@@ -34,7 +34,7 @@ public partial class SignInModel(DbLogger<SignInModel> logger, IAuthenticationSe
             logger.LogInformation($"User with email {Email} signed in successfully.");
             Shell.Current.FlyoutBehavior = FlyoutBehavior.Flyout;
             await groupsSynchronizer.FetchEntitiesFromCloudAsync();
-            await Shell.Current.GoToAsync(nameof(GroupsListPage));
+            await Shell.Current.GoToAsync("//" + nameof(GroupsListPage));
         }
         catch (Exception ex)
         {

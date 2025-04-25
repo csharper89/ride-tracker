@@ -67,6 +67,10 @@ public partial class VehicleDetailsViewModel(ISQLiteAsyncConnection db, TimeProv
             QuickSaveButton2 = quickSaveButtons[1];
 
             logger.LogInformation("Vehicle details loaded successfully.");
+        } else
+        {
+            UnitOfTime = "5";
+            PricePerUnitOfTime = "200";
         }
         PricePerUnitOfTimeLabel = string.Format(AppResources.Vehicles_Price, UnitOfTime);
     }

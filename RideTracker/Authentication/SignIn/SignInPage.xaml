@@ -4,6 +4,10 @@
              xmlns:lang="clr-namespace:RideTracker.Resources.Languages"
              x:Class="RideTracker.Pages.SignInPage"
              Title="{x:Static lang:AppResources.SignIn_PageTitle}">
+    <Shell.BackButtonBehavior>
+        <BackButtonBehavior IsVisible="False"/>
+    </Shell.BackButtonBehavior>
+    
     <VerticalStackLayout>
         <Entry Placeholder="{x:Static lang:AppResources.SignIn_Email}" Text="{Binding Email}" />
         <Entry Placeholder="{x:Static lang:AppResources.SignIn_Password}" Text="{Binding Password}" IsPassword="True" />

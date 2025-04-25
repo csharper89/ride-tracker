@@ -5,6 +5,7 @@ using CommunityToolkit.Mvvm.Input;
 using RideTracker.Authentication.Services;
 using RideTracker.Infrastructure;
 using RideTracker.Infrastructure.DbModels;
+using RideTracker.Resources.Languages;
 using RideTracker.Rides.DaysSummary;
 using RideTracker.Rides.Details;
 using RideTracker.Rides.ListOfDays;
@@ -35,6 +36,9 @@ public partial class VehicleListModel : ObservableObject
     private bool _isBusy;
 
     [ObservableProperty]
+    private double _vehicleTitleFontSize;
+
+    [ObservableProperty]
     [NotifyCanExecuteChangedFor(nameof(CreateVehicleCommand))]
     private bool _isGroupManagedByCurrentUser;
 
@@ -52,6 +56,7 @@ public partial class VehicleListModel : ObservableObject
         _logger = logger;
 
         Vehicles = new ObservableCollection<VehicleModel>();
+        VehicleTitleFontSize = GetFontSizeForVehicleTitle();
         timer.ExecuteActionEverySecond(UpdateElapsedTimeForAllVehicles);
 
         _logger.LogInformation("VehicleListModel initialized.");
@@ -70,11 +75,6 @@ public partial class VehicleListModel : ObservableObject
                 return;
             }
 
-            if(Vehicles.Count > 0)
-            {
-                return;
-            }
-
             var vehicles = await _db.Table<Vehicle>()
                 .Where(v => v.GroupId == currentGroupId && v.DeletedAt == null)
                 .ToListAsync();
@@ -85,8 +85,7 @@ public partial class VehicleListModel : ObservableObject
                 var v = models.FirstOrDefault(c => c.Id == vehicleModel.Id);
                 if (v != null)
                 {
-                    v.EstimatedRideTimeInMinutes = vehicleModel.EstimatedRideTimeInMinutes;
-                    v.RideStartedAtUtc = vehicleModel.RideStartedAtUtc;
+                    v.RestoreState(vehicleModel);
                 }
             }
             Vehicles = new ObservableCollection<VehicleModel>(models);
@@ -192,7 +191,7 @@ public partial class VehicleListModel : ObservableObject
         _rideHistoryHelper.UpdateSummariesAsync();
         _ridesSynchronizer.UploadSingleEntityToCloudAsync(ride); // Fire and forget
 
-        var message = $"Ride saved. {ride.VehicleName}, {ride.RideDurationInMinutes} min. X {ride.PricePerUnitOfTime} = {ride.Cost}";
+        var message = $"{AppResources.Vehicles_RideSaved}. {ride.VehicleName}, {ride.RideDurationInMinutes} {AppResources.Minutes} X {ride.PricePerUnitOfTime} = {ride.Cost}";
         var cts = new CancellationTokenSource(TimeSpan.FromSeconds(5));
         var toast = Toast.Make(message, ToastDuration.Long, textSize: 18);
         await toast.Show(cts.Token);
@@ -237,5 +236,15 @@ public partial class VehicleListModel : ObservableObject
         {
             vehicle.UpdateElapsedTime(UtcNow);
         }
+    }
+
+    private double GetFontSizeForVehicleTitle()
+    {
+        const int FontSizeLarge = 23;
+        const int FontSizeDefault = 20;
+
+        return Platform.CurrentActivity.Resources.Configuration.FontScale > 1
+            ? FontSizeDefault
+            : FontSizeLarge;
     }
 }
