@@ -4,6 +4,7 @@
              xmlns:local="clr-namespace:RideTracker.Vehicles.VehicleList"
              xmlns:lang="clr-namespace:RideTracker.Resources.Languages"
              xmlns:utils="clr-namespace:RideTracker.Utilities"
+             xmlns:controls="clr-namespace:RideTracker.Vehicles.VehicleTitle"
              xmlns:vehicles="clr-namespace:RideTracker.Vehicles"
              x:DataType="local:VehicleListModel"
              x:Class="RideTracker.Vehicles.VehicleList.VehicleListPage"
@@ -33,9 +34,8 @@
         
     </ContentPage.ToolbarItems>
     <ScrollView>
-        
+
         <VerticalStackLayout Padding="5" Spacing="5" BackgroundColor="Transparent">
-            <Label FontSize="20" x:Name="lbl" FontAttributes="Bold">Паравозик Паравозик Паравозик Паравозик</Label>
             <ActivityIndicator IsRunning="{Binding IsBusy}" IsVisible="{Binding IsBusy}"></ActivityIndicator>
         <CollectionView BackgroundColor="Transparent" ItemsSource="{Binding Vehicles}">
             <CollectionView.ItemsLayout>
@@ -50,11 +50,12 @@
                                         <ColumnDefinition Width="*" />
                                         <ColumnDefinition Width="*" />
                                     </Grid.ColumnDefinitions>
-                                    <Label Text="{Binding Name}" Grid.Column="0" FontAttributes="Bold" FontSize="20.0" LineBreakMode="TailTruncation" HorizontalOptions="Start" VerticalOptions="Center">
-                                        <Label.GestureRecognizers>
-                                            <TapGestureRecognizer x:DataType="{x:Null}" Command="{Binding Source={RelativeSource AncestorType={x:Type ContentPage}}, Path=BindingContext.OpenVehicleDetailsCommand}" CommandParameter="{Binding Id}"></TapGestureRecognizer>
-                                        </Label.GestureRecognizers>
-                                    </Label>
+                                    <controls:VehicleTitle x:DataType="{x:Null}"
+                                        Grid.Column="0"
+                                        Name="{Binding Name}"
+                                        Id="{Binding Id}"
+                                        OpenVehicleDetailsCommand="{Binding Source={RelativeSource AncestorType={x:Type ContentPage}}, Path=BindingContext.OpenVehicleDetailsCommand}" />
+
                                     <Label Text="{Binding ElapsedTime}" Grid.Column="1" FontAttributes="Bold" FontSize="Medium" HorizontalOptions="End" VerticalOptions="Center"/>
                                 </Grid>
                                 <Grid ColumnSpacing="5" BackgroundColor="Transparent" x:DataType="{x:Null}">

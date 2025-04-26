@@ -151,6 +151,9 @@
 	  <MauiXaml Update="Vehicles\VehicleList\VehicleList.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
+	  <MauiXaml Update="Vehicles\VehicleTitle\VehicleTitle.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
 	</ItemGroup>
 	
 </Project>

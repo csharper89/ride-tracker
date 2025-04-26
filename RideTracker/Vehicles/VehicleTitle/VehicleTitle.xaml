@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentView xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="RideTracker.Vehicles.VehicleTitle.VehicleTitle">
+    <Label x:Name="Title"
+           FontAttributes="Bold"
+           LineBreakMode="TailTruncation"
+           HorizontalOptions="Start"
+           VerticalOptions="Center"
+           Text="{Binding Name}"
+           >
+        <Label.GestureRecognizers>
+            <TapGestureRecognizer
+                Command="{Binding Source={RelativeSource AncestorType={x:Type ContentView}}, Path=OpenVehicleDetailsCommand}"
+                CommandParameter="{Binding Id}" />
+        </Label.GestureRecognizers>
+    </Label>
+</ContentView>
