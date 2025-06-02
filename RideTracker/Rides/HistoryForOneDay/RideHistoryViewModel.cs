@@ -30,7 +30,27 @@ public partial class RideHistoryViewModel(ISQLiteAsyncConnection db, RidesSynchr
     public async Task InitializeAsync()
     {
         logger.LogInformation($"Initializing RideHistoryViewModel for date: {Date}.");
-        await LoadDataFromDbAsync();
+
+        try
+        {
+            IsBusy = true;
+            await LoadDataFromDbAsync();
+            logger.LogInformation("Data loaded from database.");
+
+            await ridesSynchronizer.FetchEntitiesFromCloudAsync();
+            logger.LogInformation("Entities fetched from cloud.");
+
+            await LoadDataFromDbAsync();
+        }
+        catch (Exception ex)
+        {
+            logger.LogError(ex, "Error during initialization.");
+        }
+        finally
+        {
+            IsBusy = false;
+            logger.LogInformation("RideHistoryViewModel initialization completed.");
+        }
     }
 
     private async Task LoadDataFromDbAsync()
@@ -66,22 +86,7 @@ public partial class RideHistoryViewModel(ISQLiteAsyncConnection db, RidesSynchr
     private async Task RefreshAsync()
     {
         logger.LogInformation("Refreshing RideHistoryViewModel...");
-        try
-        {
-            IsBusy = true;
-            await ridesSynchronizer.FetchEntitiesFromCloudAsync();
-            logger.LogInformation("Entities fetched from cloud.");
-            await LoadDataFromDbAsync();
-        }
-        catch (Exception ex)
-        {
-            logger.LogError(ex, "Error during initialization.");
-        }
-        finally
-        {
-            IsBusy = false;
-            logger.LogInformation("RideHistoryViewModel refresh completed.");
-        }
+        await InitializeAsync();
     }
 
     [RelayCommand]

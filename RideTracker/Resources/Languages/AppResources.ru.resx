@@ -267,6 +267,24 @@
   <data name="SignUp_WeakPassword" xml:space="preserve">
     <value>Минимальная длина пароля - 6 символов</value>
   </data>
+  <data name="Stats_CarName" xml:space="preserve">
+    <value>Машинка</value>
+  </data>
+  <data name="Stats_Month" xml:space="preserve">
+    <value>Месяц</value>
+  </data>
+  <data name="Stats_PageTitle" xml:space="preserve">
+    <value>Статистика</value>
+  </data>
+  <data name="Stats_TotalCostPerPeriod" xml:space="preserve">
+    <value>Сумма</value>
+  </data>
+  <data name="Stats_Week" xml:space="preserve">
+    <value>Неделя</value>
+  </data>
+  <data name="Stats_Year" xml:space="preserve">
+    <value>Год</value>
+  </data>
   <data name="Vehicles_Delete" xml:space="preserve">
     <value>Удалить</value>
   </data>

@@ -8,6 +8,7 @@
     xmlns:vehicleList="clr-namespace:RideTracker.Vehicles.VehicleList"
     xmlns:groupList="clr-namespace:RideTracker.Groups.List"
     xmlns:groupDetails="clr-namespace:RideTracker.Groups.Details"
+    xmlns:stats="clr-namespace:RideTracker.Stats"
     xmlns:lang="clr-namespace:RideTracker.Resources.Languages"
     Shell.FlyoutBehavior="Flyout"
     Title="RideTracker">
@@ -15,4 +16,11 @@
     <ShellContent Title="{x:Static lang:AppResources.Vehicles_ListPageTitle}" Route="VehicleListPage" ContentTemplate="{DataTemplate vehicleList:VehicleListPage}" />
     <ShellContent Route="GroupsListPage" Title="{x:Static lang:AppResources.Groups_PageTitle}" ContentTemplate="{DataTemplate groupList:GroupsListPage}" />
 
+    <FlyoutItem Title="{x:Static lang:AppResources.Stats_PageTitle}">
+        <Tab>
+            <ShellContent Route="StatsWeek" Title="{x:Static lang:AppResources.Stats_Week}" ContentTemplate="{DataTemplate stats:Stats}" />
+            <ShellContent Route="StatsMonth" Title="{x:Static lang:AppResources.Stats_Month}" ContentTemplate="{DataTemplate stats:Stats}" />
+            <ShellContent Route="StatsYear" Title="{x:Static lang:AppResources.Stats_Year}" ContentTemplate="{DataTemplate stats:Stats}" />            
+        </Tab>
+    </FlyoutItem>      
 </Shell>

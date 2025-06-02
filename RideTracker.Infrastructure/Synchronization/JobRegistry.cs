@@ -6,6 +6,6 @@ public class JobRegistry : Registry
 {
     public JobRegistry(SynchronizationJob synchronizationJob)
     {
-        Schedule(synchronizationJob).NonReentrant().ToRunNow().AndEvery(5).Minutes();
+        Schedule(synchronizationJob).NonReentrant().ToRunNow().AndEvery(10).Minutes();
     }
 }

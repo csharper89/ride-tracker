@@ -111,6 +111,9 @@
 	  <Compile Update="Rides\DaysSummary\DaysSummaryPage.xaml.cs">
 	    <DependentUpon>DaysSummaryPage.xaml</DependentUpon>
 	  </Compile>
+	  <Compile Update="Stats\List\StatsPeriodList.xaml.cs">
+	    <DependentUpon>StatsPeriodList.xaml</DependentUpon>
+	  </Compile>
 	</ItemGroup>
 
 	<ItemGroup>
@@ -143,6 +146,12 @@
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
 	  <MauiXaml Update="Rides\DaysSummary\DaysSummaryPage.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="Stats\Details\StatsPeriodDetails.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="Stats\List\StatsPeriodList.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
 	  <MauiXaml Update="Vehicles\VehicleDetails\VehicleDetailsPage.xaml">

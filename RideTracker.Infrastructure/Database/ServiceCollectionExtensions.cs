@@ -26,12 +26,20 @@ public static class ServiceCollectionExtensions
         })
             .ConfigurePrimaryHttpMessageHandler(() =>
         {
-            return new HttpClientHandler
-            { 
+
 #if DEBUG
+            return new HttpClientHandler
+            {
                 ServerCertificateCustomValidationCallback = (message, cert, chain, errors) => true
-#endif
             };
+#else
+
+            return new SocketsHttpHandler
+            {
+                PooledConnectionLifetime = TimeSpan.FromMinutes(1),
+                PooledConnectionIdleTimeout = TimeSpan.FromMinutes(1),
+            };
+#endif
         })
             .AddResilienceHandler("custom-retry-policy", (builder, context) =>
         {
@@ -48,7 +56,7 @@ public static class ServiceCollectionExtensions
                     var response = args.Outcome.Result;
                     var exceptionMessage = args.Outcome.Exception is not null ? $"Exception: {args.Outcome.Exception}" : string.Empty;
                     var responseCodeMessage = response is not null ? $"Response code: {response.StatusCode}." : string.Empty;
-                    logger.LogWarning($"Retry {args.AttemptNumber} in {args.RetryDelay.TotalSeconds}s due to failure. {responseCodeMessage} {exceptionMessage}");
+                    logger.LogWarning($"Retry {args.AttemptNumber} in {args.RetryDelay.TotalSeconds}s due to failure. SocketsHttpHandler. {responseCodeMessage} {exceptionMessage}");
                     return default;
                 }
             });

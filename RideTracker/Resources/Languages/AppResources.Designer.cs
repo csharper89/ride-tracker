@@ -511,6 +511,60 @@ namespace RideTracker.Resources.Languages {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Car Name.
+        /// </summary>
+        internal static string Stats_CarName {
+            get {
+                return ResourceManager.GetString("Stats_CarName", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Month.
+        /// </summary>
+        internal static string Stats_Month {
+            get {
+                return ResourceManager.GetString("Stats_Month", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Stats.
+        /// </summary>
+        internal static string Stats_PageTitle {
+            get {
+                return ResourceManager.GetString("Stats_PageTitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Total.
+        /// </summary>
+        internal static string Stats_TotalCostPerPeriod {
+            get {
+                return ResourceManager.GetString("Stats_TotalCostPerPeriod", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Week.
+        /// </summary>
+        internal static string Stats_Week {
+            get {
+                return ResourceManager.GetString("Stats_Week", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Year.
+        /// </summary>
+        internal static string Stats_Year {
+            get {
+                return ResourceManager.GetString("Stats_Year", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Start.
         /// </summary>
         internal static string Vehicle_StartRide {

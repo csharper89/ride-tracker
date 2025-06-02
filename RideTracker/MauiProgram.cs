@@ -19,8 +19,12 @@ using RideTracker.Vehicles.Synchronization;
 using RideTracker.Vehicles.VehicleDetails;
 using RideTracker.Vehicles.VehicleList;
 using Syncfusion.Maui.Toolkit.Hosting;
+using RideTracker.Stats;
 using ITimer = RideTracker.Utilities.ITimer;
 using Timer = RideTracker.Utilities.Timer;
+using RideTracker.Stats.PeriodGenerators;
+using RideTracker.Stats.List;
+using RideTracker.Stats.Details;
 
 namespace RideTracker
 {
@@ -66,22 +70,27 @@ namespace RideTracker
             builder.Services.AddPersistence();
             builder.Services.AddHttpClientWithRetry();
 
+            builder.Services.AddTransient<Stats.Stats>();
             builder.Services.AddTransient<VehicleListPage>();
             builder.Services.AddTransient<GroupsListPage>();
             builder.Services.AddTransient<GroupListModel>();
             builder.Services.AddTransient<VehicleListModel>();
+            builder.Services.AddTransient<MonthlyPeriodGenerator>();
+            builder.Services.AddTransient<WeeklyPeriodGenerator>();
+            builder.Services.AddTransient<YearlyPeriodGenerator>();
+            builder.Services.AddTransient<StatsViewModel>();
+            builder.Services.AddTransient<StatsPeriodDetailsViewModel>();
 
             builder.Services.AddTransientWithShellRoute<SignInPage, SignInModel>(nameof(SignInPage));
             builder.Services.AddTransientWithShellRoute<SignUpPage, SignUpModel>(nameof(SignUpPage));
-            //builder.Services.AddTransientWithShellRoute<GroupsListPage, GroupListModel>(nameof(GroupsListPage));
             builder.Services.AddTransientWithShellRoute<GroupDetailsPage, GroupDetailsViewModel>(nameof(GroupDetailsPage));
-            //builder.Services.AddSingletonWithShellRoute<VehicleListPage, VehicleListModel>(nameof(VehicleListPage));
             builder.Services.AddTransientWithShellRoute<VehicleDetailsPage, VehicleDetailsViewModel>(nameof(VehicleDetailsPage));
             builder.Services.AddTransientWithShellRoute<RideDetailsPage, RideDetailsViewModel>(nameof(RideDetailsPage));
             builder.Services.AddTransientWithShellRoute<DaysSummaryPage, DaysSummaryViewModel>(nameof(DaysSummaryPage));
             builder.Services.AddTransientWithShellRoute<HistoryForOneDayPage, RideHistoryViewModel>(nameof(HistoryForOneDayPage));
             builder.Services.AddTransientWithShellRoute<CreateInvitePage, CreateInviteViewModel>(nameof(CreateInvitePage));
             builder.Services.AddTransientWithShellRoute<ActivateInvitePage, ActivateInviteViewModel>(nameof(ActivateInvitePage));
+            builder.Services.AddTransientWithShellRoute<StatsPeriodDetailsPage, StatsPeriodDetailsViewModel>(nameof(StatsPeriodDetailsPage));
 
             builder.Services.AddFirebaseAuthentication();
             builder.Services.AddSingleton(TimeProvider.System);

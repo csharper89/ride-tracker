@@ -15,26 +15,21 @@ public partial class DaysSummaryViewModel(RideHistoryHelper helper, RidesSynchro
     [ObservableProperty]
     private bool _isBusy;
 
+    [ObservableProperty]
+    private int _total;
+
     public async Task LoadSummariesAsync()
     {
         logger.LogInformation("Loading summaries...");
-        IsBusy = true;
         try
         {
-            await ridesSynchronizer.FetchEntitiesFromCloudAsync();
-            logger.LogInformation("Entities fetched from cloud successfully.");
-            await helper.UpdateSummariesAsync();
-            logger.LogInformation("Summaries updated successfully.");
             Summaries = await helper.GetDatesSummaryAsync();
+            Total = Summaries.Sum(x => x.TotalSumForDay);
+            logger.LogInformation("Summaries loaded successfully.");
         }
         catch (Exception ex)
         {
-            logger.LogError(ex, "Error during refresh.");
-        }
-        finally
-        {
-            IsBusy = false;
-            logger.LogInformation("Loading completed.");
+            logger.LogError(ex, "Error loading summaries.");
         }
     }
 
@@ -65,7 +60,24 @@ public partial class DaysSummaryViewModel(RideHistoryHelper helper, RidesSynchro
     [RelayCommand]
     private async Task RefreshAsync()
     {
-        logger.LogInformation("Refreshing summaries...");
-        await LoadSummariesAsync();
+        logger.LogInformation("Refreshing data...");
+        IsBusy = true;
+        try
+        {
+            await ridesSynchronizer.FetchEntitiesFromCloudAsync();
+            logger.LogInformation("Entities fetched from cloud successfully.");
+            await helper.UpdateSummariesAsync();
+            logger.LogInformation("Summaries updated successfully.");
+            await LoadSummariesAsync();
+        }
+        catch (Exception ex)
+        {
+            logger.LogError(ex, "Error during refresh.");
+        }
+        finally
+        {
+            IsBusy = false;
+            logger.LogInformation("Refresh completed.");
+        }
     }
 }

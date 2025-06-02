@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="RideTracker.Stats.Details.StatsPeriodDetailsPage"
+             xmlns:lang="clr-namespace:RideTracker.Resources.Languages"
+             Title="{Binding Period.Title}">
+    <ScrollView>
+        <VerticalStackLayout Padding="5">
+            <!-- Table Header -->
+            <Grid ColumnDefinitions="2*,1*">
+                <!-- Header: Name, Total Cost, Rides Count -->
+                <Label Text="{x:Static lang:AppResources.Stats_CarName}" FontAttributes="Bold" HorizontalOptions="Start" Grid.Column="0" />
+                <Label Text="{x:Static lang:AppResources.Stats_TotalCostPerPeriod}" FontAttributes="Bold" HorizontalOptions="End" Grid.Column="1" />
+            </Grid>
+
+            <!-- Table Body -->
+            <CollectionView
+        ItemsSource="{Binding CarStats}"
+        VerticalOptions="FillAndExpand">
+                <CollectionView.ItemTemplate>
+                    <DataTemplate>
+                        <Grid Margin="0,15,0,0" ColumnDefinitions="2*,1*">
+                            <!-- Name Column -->
+                            <Label Text="{Binding Name}" HorizontalOptions="Start" Grid.Column="0" />
+
+                            <!-- Total Cost Column -->
+                            <Label Text="{Binding TotalCost}" HorizontalOptions="End" Grid.Column="1" />
+
+                        </Grid>
+                    </DataTemplate>
+                </CollectionView.ItemTemplate>
+            </CollectionView>
+            <HorizontalStackLayout HorizontalOptions="End" Spacing="10">
+                <Label FontSize="Medium" FontAttributes="Bold" Text="{x:Static lang:AppResources.History_TotalSum}"></Label>
+                <Label FontSize="Medium" FontAttributes="Bold" Text="{Binding Total}"></Label>
+            </HorizontalStackLayout>
+        </VerticalStackLayout>
+    </ScrollView>
+</ContentPage>

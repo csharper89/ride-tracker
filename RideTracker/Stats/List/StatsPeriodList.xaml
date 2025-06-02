@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:stats="clr-namespace:RideTracker.Stats"
+             x:Class="RideTracker.Stats.Stats"
+             Title="Stats">
+    <ScrollView>
+        <VerticalStackLayout>
+            <CollectionView Margin="5" ItemsSource="{Binding Periods}" SelectionMode="None">
+                <CollectionView.ItemsLayout>
+                    <LinearItemsLayout Orientation="Vertical" ItemSpacing="10"/>
+                </CollectionView.ItemsLayout>
+                <CollectionView.ItemTemplate>
+                    <DataTemplate>
+                        <Border Stroke="Gray" StrokeThickness="1" Padding="10" BackgroundColor="White" StrokeShape="RoundRectangle 10">
+                            <Grid ColumnDefinitions="*,Auto">
+                                <Label Text="{Binding Title}" 
+                                   VerticalOptions="Center"
+                                   FontSize="16" 
+                                   TextColor="Black"/>
+
+                                <Label Text="{Binding TotalCostPerPeriod}" 
+                                    VerticalOptions="Center"
+                                    FontSize="16" 
+                                    TextColor="Black"
+                                    FontAttributes="Bold"
+                                    Grid.Column="1"/>
+
+                                <Grid.GestureRecognizers>
+                                    <TapGestureRecognizer
+                                        Command="{Binding Source={RelativeSource AncestorType={x:Type ContentPage}}, Path=BindingContext.OpenPeriodCommand}" 
+                                        CommandParameter="{Binding .}"/>
+                                </Grid.GestureRecognizers>
+                            </Grid>
+                        </Border>
+                    </DataTemplate>
+                </CollectionView.ItemTemplate>
+            </CollectionView>
+        </VerticalStackLayout>
+    </ScrollView>
+</ContentPage>
