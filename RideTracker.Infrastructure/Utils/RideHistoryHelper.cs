@@ -29,7 +29,7 @@ public class RideHistoryHelper(SQLiteAsyncConnection db, TimeProvider timeProvid
     {
         try
         {
-            //_date = timeProvider.GetLocalNow().Date;
+            _date = timeProvider.GetLocalNow().Date;
             _dates = await GetDatesSummaryFromDatabaseAsync();
         }
         catch (Exception ex)
@@ -53,7 +53,7 @@ public class RideHistoryHelper(SQLiteAsyncConnection db, TimeProvider timeProvid
     {
         foreach (var summary in daysSummary)
         {
-            summary.DateString = summary.Date.ToString("dd.MM.yyyy");
+            summary.DateString = summary.Date.ToString("dd MMMM");
         }
     }
 

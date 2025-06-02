@@ -4,16 +4,19 @@ using SQLite;
 using RideTracker.Utilities;
 using RideTracker.Infrastructure.Synchronization;
 using RideTracker.Rides.DaysSummary;
+using Newtonsoft.Json;
 
 namespace RideTracker.Rides.Synchronization;
 
 public class RidesSynchronizer : EntitySynchronizer<Ride, RideResponse>
 {
     private readonly RideHistoryHelper _rideHistoryHelper;
+    private readonly DbLogger<EntitySynchronizer<Ride, RideResponse>> _logger;
 
     public RidesSynchronizer(RideTrackerHttpClient httpClient, ISQLiteAsyncConnection db, DbLogger<EntitySynchronizer<Ride, RideResponse>> logger, TimeProvider timeProvider, GroupUtils groupUtils, RideHistoryHelper rideHistoryHelper) : base(httpClient, db, logger, timeProvider, groupUtils)
     {
         _rideHistoryHelper = rideHistoryHelper;
+        _logger = logger;
     }
 
     protected override object GetUploadRequest(Ride ride)
@@ -38,6 +41,7 @@ public class RidesSynchronizer : EntitySynchronizer<Ride, RideResponse>
 
     protected override Ride CreateEntityFromResponse(RideResponse rideResponse)
     {
+        _logger.LogInformation($"CreateEntityFromResponse: {JsonConvert.SerializeObject(rideResponse)}");
         return new Ride
         {
             Id = rideResponse.Id,
@@ -59,6 +63,8 @@ public class RidesSynchronizer : EntitySynchronizer<Ride, RideResponse>
 
     protected override void UpdateEntityFromResponse(RideResponse rideResponse, Ride existingRide)
     {
+        _logger.LogInformation($"CreateEntityFromResponse: {JsonConvert.SerializeObject(rideResponse)}");
+
         existingRide.VehicleId = rideResponse.VehicleId;
         existingRide.VehicleName = rideResponse.VehicleName;
         existingRide.RideDurationInMinutes = rideResponse.RideDurationInMinutes;
