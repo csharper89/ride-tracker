@@ -7,7 +7,7 @@ public class GroupUtils(ISQLiteAsyncConnection db)
 {
     private Group? _currentGroup;
 
-    public async virtual Task<Guid?> GetCurrentGroupIdAsync()
+    public async virtual ValueTask<Guid?> GetCurrentGroupIdAsync()
     {
         if(_currentGroup is null)
         {
@@ -17,7 +17,7 @@ public class GroupUtils(ISQLiteAsyncConnection db)
         return _currentGroup?.Id;
     }
 
-    public async virtual Task<bool> IsUserManagingCurrentGroupAsync()
+    public async virtual ValueTask<bool> IsUserManagingCurrentGroupAsync()
     {
         if (_currentGroup is null)
         {

@@ -1,7 +1,6 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using RideTracker.Infrastructure;
-using RideTracker.Infrastructure.DbModels;
 using RideTracker.Rides.Details;
 using RideTracker.Rides.HistoryForOneDay;
 using RideTracker.Rides.Synchronization;
@@ -26,6 +25,15 @@ public partial class RideHistoryViewModel(ISQLiteAsyncConnection db, RidesSynchr
 
     [ObservableProperty]
     private int _sum;
+
+    [ObservableProperty]
+    private int _salary;
+
+    [ObservableProperty]
+    private bool _isSalaryVisible;
+
+    private readonly int _baseSalaryPerDay = 800;
+    private readonly int _benefitsStartAt = 4000;
 
     public async Task InitializeAsync()
     {
@@ -64,7 +72,7 @@ public partial class RideHistoryViewModel(ISQLiteAsyncConnection db, RidesSynchr
             var endOfDayUtc = Date.AddDays(1).ToUniversalTime();
 
             RideSummaries = await db.QueryAsync<RideSummary>(@"
-                SELECT r.Id, r.VehicleName, r.CreatedAt, r.IsUploadedToCloud, 
+                SELECT r.Id, r.VehicleName, r.CreatedAt, r.IsUploadedToCloud,
                        r.PricePerUnitOfTime, r.RideDurationInMinutes, r.Cost, r.UnitOfTimeInMinutes
                 FROM Rides r
                 INNER JOIN Vehicles v ON r.VehicleId = v.Id
@@ -73,6 +81,8 @@ public partial class RideHistoryViewModel(ISQLiteAsyncConnection db, RidesSynchr
 
             DateFormatted = Date.ToString("dd.MM.yyyy");
             Sum = RideSummaries.Sum(x => x.Cost);
+            Salary = CalculateSalary(Sum);
+            IsSalaryVisible = Salary > _baseSalaryPerDay && await groupUtils.IsUserManagingCurrentGroupAsync();
 
             logger.LogInformation($"Data loaded: {RideSummaries.Count} ride summaries found for {DateFormatted}, total cost: {Sum}.");
         }
@@ -94,5 +104,29 @@ public partial class RideHistoryViewModel(ISQLiteAsyncConnection db, RidesSynchr
     {
         logger.LogInformation($"Opening ride details for ride ID: {ride.Id}.");
         await Shell.Current.GoToAsync($"{nameof(RideDetailsPage)}?RideId={ride.Id}");
+    }
+
+    private int CalculateSalary(int sum)
+    {
+        if(sum <= _baseSalaryPerDay)
+        {
+            return sum;
+        }
+
+        if(sum < _benefitsStartAt)
+        {
+            return _baseSalaryPerDay;
+        }
+
+        var benefits = 0;
+        var currentLevel = _benefitsStartAt;
+
+        while (currentLevel <= sum)
+        {
+            benefits += 100;
+            currentLevel += 1000;
+        }
+
+        return _baseSalaryPerDay + benefits;
     }
 }

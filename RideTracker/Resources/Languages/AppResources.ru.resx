@@ -156,6 +156,9 @@
   <data name="History_DaysSummaryPageTitle" xml:space="preserve">
     <value>История</value>
   </data>
+  <data name="History_Salary" xml:space="preserve">
+    <value>ЗП:</value>
+  </data>
   <data name="History_TotalSum" xml:space="preserve">
     <value>Итого:</value>
   </data>

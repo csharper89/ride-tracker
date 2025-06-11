@@ -63,7 +63,7 @@ public class RidesSynchronizer : EntitySynchronizer<Ride, RideResponse>
 
     protected override void UpdateEntityFromResponse(RideResponse rideResponse, Ride existingRide)
     {
-        _logger.LogInformation($"CreateEntityFromResponse: {JsonConvert.SerializeObject(rideResponse)}");
+        _logger.LogInformation($"UpdateEntityFromResponse: {JsonConvert.SerializeObject(rideResponse)}");
 
         existingRide.VehicleId = rideResponse.VehicleId;
         existingRide.VehicleName = rideResponse.VehicleName;
