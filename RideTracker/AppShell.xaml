@@ -16,7 +16,7 @@
     <ShellContent Title="{x:Static lang:AppResources.Vehicles_ListPageTitle}" Route="VehicleListPage" ContentTemplate="{DataTemplate vehicleList:VehicleListPage}" />
     <ShellContent Route="GroupsListPage" Title="{x:Static lang:AppResources.Groups_PageTitle}" ContentTemplate="{DataTemplate groupList:GroupsListPage}" />
 
-    <FlyoutItem Title="{x:Static lang:AppResources.Stats_PageTitle}">
+    <FlyoutItem x:Name="statsPage" Title="{x:Static lang:AppResources.Stats_PageTitle}">
         <Tab>
             <ShellContent Route="StatsWeek" Title="{x:Static lang:AppResources.Stats_Week}" ContentTemplate="{DataTemplate stats:Stats}" />
             <ShellContent Route="StatsMonth" Title="{x:Static lang:AppResources.Stats_Month}" ContentTemplate="{DataTemplate stats:Stats}" />

@@ -1,44 +1,20 @@
-﻿using CommunityToolkit.Maui.Alerts;
-using CommunityToolkit.Maui.Core;
-using Font = Microsoft.Maui.Font;
-
+﻿
 namespace RideTracker
 {
     public partial class AppShell : Shell
     {
-        public AppShell()
+        private readonly GroupUtils _groupUtils;
+
+        public AppShell(GroupUtils groupUtils)
         {
             InitializeComponent();
-        }
-        public static async Task DisplaySnackbarAsync(string message)
-        {
-            CancellationTokenSource cancellationTokenSource = new CancellationTokenSource();
-
-            var snackbarOptions = new SnackbarOptions
-            {
-                BackgroundColor = Color.FromArgb("#FF3300"),
-                TextColor = Colors.White,
-                ActionButtonTextColor = Colors.Yellow,
-                CornerRadius = new CornerRadius(0),
-                Font = Font.SystemFontOfSize(18),
-                ActionButtonFont = Font.SystemFontOfSize(14)
-            };
-
-            var snackbar = Snackbar.Make(message, visualOptions: snackbarOptions);
-
-            await snackbar.Show(cancellationTokenSource.Token);
+            _groupUtils = groupUtils;
         }
 
-        public static async Task DisplayToastAsync(string message)
+        protected override async void OnAppearing()
         {
-            // Toast is currently not working in MCT on Windows
-            if (OperatingSystem.IsWindows())
-                return;
-
-            var toast = Toast.Make(message, textSize: 18);
-
-            var cts = new CancellationTokenSource(TimeSpan.FromSeconds(5));
-            await toast.Show(cts.Token);
+            statsPage.IsVisible = await _groupUtils.IsUserManagingCurrentGroupAsync();
+            base.OnAppearing();
         }
     }
 }

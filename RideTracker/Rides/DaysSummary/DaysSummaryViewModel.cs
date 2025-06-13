@@ -7,7 +7,7 @@ using RideTracker.Rides.Synchronization;
 
 namespace RideTracker.Rides.ListOfDays;
 
-public partial class DaysSummaryViewModel(RideHistoryHelper helper, RidesSynchronizer ridesSynchronizer, DbLogger<DaysSummaryViewModel> logger) : ObservableObject
+public partial class DaysSummaryViewModel(RideHistoryHelper helper, RidesSynchronizer ridesSynchronizer, DbLogger<DaysSummaryViewModel> logger, GroupUtils groupUtils) : ObservableObject
 {
     [ObservableProperty]
     private List<SummaryForDay> _summaries;
@@ -18,6 +18,9 @@ public partial class DaysSummaryViewModel(RideHistoryHelper helper, RidesSynchro
     [ObservableProperty]
     private int _total;
 
+    [ObservableProperty]
+    private bool _isGroupAdmin;
+
     public async Task LoadSummariesAsync()
     {
         logger.LogInformation("Loading summaries...");
@@ -25,6 +28,7 @@ public partial class DaysSummaryViewModel(RideHistoryHelper helper, RidesSynchro
         {
             Summaries = await helper.GetDatesSummaryAsync();
             Total = Summaries.Sum(x => x.TotalSumForDay);
+            IsGroupAdmin = await groupUtils.IsUserManagingCurrentGroupAsync();
             logger.LogInformation("Summaries loaded successfully.");
         }
         catch (Exception ex)

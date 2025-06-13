@@ -58,7 +58,7 @@
                 <Label FontSize="Large" Text="{x:Static lang:AppResources.History_Salary}"></Label>
                 <Label FontSize="Large" Text="{Binding Salary}"></Label>
             </HorizontalStackLayout>
-            <Button Text="{x:Static lang:AppResources.History_GoToStats}" Command="{Binding OpenStatsCommand}" />
+            <Button Text="{x:Static lang:AppResources.History_GoToStats}" IsVisible="{Binding IsGroupAdmin}" Command="{Binding OpenStatsCommand}" />
         </VerticalStackLayout>
     </ScrollView>
 </ContentPage>

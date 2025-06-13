@@ -8,6 +8,7 @@ using RideTracker.Rides.Synchronization;
 using RideTracker.Stats;
 using RideTracker.Stats.Details;
 using SQLite;
+using DayOfWeek = System.DayOfWeek;
 
 namespace RideTracker.Rides.History;
 
@@ -35,7 +36,10 @@ public partial class RideHistoryViewModel(ISQLiteAsyncConnection db, RidesSynchr
     [ObservableProperty]
     private bool _isSalaryVisible;
 
-    private readonly int _baseSalaryPerDay = 800;
+    [ObservableProperty]
+    private bool _isGroupAdmin;
+
+    private int BaseSalary => IsItWeekend() ? 1400 : 800;
     private readonly int _benefitsStartAt = 4000;
 
     public async Task InitializeAsync()
@@ -45,6 +49,7 @@ public partial class RideHistoryViewModel(ISQLiteAsyncConnection db, RidesSynchr
         try
         {
             IsBusy = true;
+            IsGroupAdmin = await groupUtils.IsUserManagingCurrentGroupAsync();
             await LoadDataFromDbAsync();
             logger.LogInformation("Data loaded from database.");
 
@@ -85,7 +90,7 @@ public partial class RideHistoryViewModel(ISQLiteAsyncConnection db, RidesSynchr
             DateFormatted = Date.ToString("dd.MM.yyyy");
             Sum = RideSummaries.Sum(x => x.Cost);
             Salary = CalculateSalary(Sum);
-            IsSalaryVisible = Salary > _baseSalaryPerDay && await groupUtils.IsUserManagingCurrentGroupAsync();
+            IsSalaryVisible = Salary > BaseSalary && await groupUtils.IsUserManagingCurrentGroupAsync();
 
             logger.LogInformation($"Data loaded: {RideSummaries.Count} ride summaries found for {DateFormatted}, total cost: {Sum}.");
         }
@@ -129,14 +134,14 @@ public partial class RideHistoryViewModel(ISQLiteAsyncConnection db, RidesSynchr
 
     private int CalculateSalary(int sum)
     {
-        if(sum <= _baseSalaryPerDay)
+        if(sum <= BaseSalary)
         {
             return sum;
         }
 
         if(sum < _benefitsStartAt)
         {
-            return _baseSalaryPerDay;
+            return BaseSalary;
         }
 
         var benefits = 0;
@@ -148,6 +153,14 @@ public partial class RideHistoryViewModel(ISQLiteAsyncConnection db, RidesSynchr
             currentLevel += 1000;
         }
 
-        return _baseSalaryPerDay + benefits;
+        return BaseSalary + benefits;
+    }
+
+    
+
+    private bool IsItWeekend()
+    {
+        var dayOfWeek = Date.DayOfWeek;
+        return dayOfWeek == DayOfWeek.Saturday || dayOfWeek == DayOfWeek.Sunday;
     }
 }

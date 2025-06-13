@@ -12,8 +12,9 @@ namespace RideTracker
         private readonly IAuthenticationService _authService;
         private readonly JobRegistry _jobRegistry;
         private readonly DbLogger<App> _logger;
+        private readonly GroupUtils _groupUtils;
 
-        public App(DatabaseMigrator databaseMigrator, RideHistoryHelper rideHistoryHelper, IAuthenticationService authService, JobRegistry jobRegistry, DbLogger<App> logger)
+        public App(DatabaseMigrator databaseMigrator, RideHistoryHelper rideHistoryHelper, IAuthenticationService authService, JobRegistry jobRegistry, DbLogger<App> logger, GroupUtils groupUtils)
         {
             InitializeComponent();
             Task.Run(databaseMigrator.MigrateAsync).Wait();
@@ -24,6 +25,7 @@ namespace RideTracker
             TaskScheduler.UnobservedTaskException += OnUnobservedTaskException;
             _jobRegistry = jobRegistry;
             _logger = logger;
+            _groupUtils = groupUtils;
         }
 
         private void OnUnhandledException(object sender, UnhandledExceptionEventArgs e)
@@ -61,7 +63,7 @@ namespace RideTracker
 
         protected override Window CreateWindow(IActivationState? activationState)
         {
-            return new Window(new AppShell());
+            return new Window(new AppShell(_groupUtils));
         }
     }
 }
