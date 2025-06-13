@@ -178,6 +178,15 @@ namespace RideTracker.Resources.Languages {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Open stats for the day.
+        /// </summary>
+        internal static string History_GoToStats {
+            get {
+                return ResourceManager.GetString("History_GoToStats", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Salary:.
         /// </summary>
         internal static string History_Salary {

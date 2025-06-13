@@ -24,7 +24,7 @@
                             <Label Text="{Binding Name}" HorizontalOptions="Start" Grid.Column="0" />
 
                             <!-- Total Cost Column -->
-                            <Label Text="{Binding TotalCost}" HorizontalOptions="End" Grid.Column="1" />
+                            <Label Text="{Binding CostAndRidesCount}" HorizontalOptions="End" Grid.Column="1" />
 
                         </Grid>
                     </DataTemplate>

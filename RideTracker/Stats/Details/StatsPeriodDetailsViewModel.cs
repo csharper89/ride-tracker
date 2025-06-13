@@ -18,7 +18,7 @@ public partial class StatsPeriodDetailsViewModel(ISQLiteAsyncConnection db, Grou
     public async Task InitializeAsync()
     {
         var currentGroupId = await groupUtils.GetCurrentGroupIdAsync();
-        var stats = await db.QueryAsync<CarStats>(@"SELECT v.Name, SUM(r.Cost) as TotalCost
+        var stats = await db.QueryAsync<CarStats>(@"SELECT v.Name, SUM(r.Cost) as TotalCost, count(*) as RidesCount
                                                     FROM Rides r 
                                                     JOIN Vehicles v ON r.VehicleId = v.Id 
                                                     WHERE v.GroupId = ? 

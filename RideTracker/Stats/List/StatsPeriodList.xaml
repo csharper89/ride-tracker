@@ -2,8 +2,9 @@
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:stats="clr-namespace:RideTracker.Stats"
+             xmlns:lang="clr-namespace:RideTracker.Resources.Languages"
              x:Class="RideTracker.Stats.Stats"
-             Title="Stats">
+             Title="{x:Static lang:AppResources.Stats_PageTitle}">
     <ScrollView>
         <VerticalStackLayout>
             <CollectionView Margin="5" ItemsSource="{Binding Periods}" SelectionMode="None">

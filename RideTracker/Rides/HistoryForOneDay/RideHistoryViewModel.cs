@@ -1,9 +1,12 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
+using Java.Time;
 using RideTracker.Infrastructure;
 using RideTracker.Rides.Details;
 using RideTracker.Rides.HistoryForOneDay;
 using RideTracker.Rides.Synchronization;
+using RideTracker.Stats;
+using RideTracker.Stats.Details;
 using SQLite;
 
 namespace RideTracker.Rides.History;
@@ -97,6 +100,7 @@ public partial class RideHistoryViewModel(ISQLiteAsyncConnection db, RidesSynchr
     {
         logger.LogInformation("Refreshing RideHistoryViewModel...");
         await InitializeAsync();
+        ridesSynchronizer.UploadEntitiesToCloudAsync();
     }
 
     [RelayCommand]
@@ -104,6 +108,23 @@ public partial class RideHistoryViewModel(ISQLiteAsyncConnection db, RidesSynchr
     {
         logger.LogInformation($"Opening ride details for ride ID: {ride.Id}.");
         await Shell.Current.GoToAsync($"{nameof(RideDetailsPage)}?RideId={ride.Id}");
+    }
+
+    [RelayCommand]
+    private async Task OpenStatsAsync(RideSummary ride)
+    {
+        logger.LogInformation($"Opening stats for day: {Date}.");
+        var period = new StatsPeriod
+        {
+            Start = Date,
+            End = Date,
+            TotalCostPerPeriod = Sum,
+            Title = Date.ToString("dd.MM.yyyy"),
+        };
+        await Shell.Current.GoToAsync(nameof(StatsPeriodDetailsPage), new Dictionary<string, object>
+        {
+            { "Period", period }
+        });
     }
 
     private int CalculateSalary(int sum)
