@@ -1,6 +1,5 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
-using Java.Time;
 using RideTracker.Infrastructure;
 using RideTracker.Rides.Details;
 using RideTracker.Rides.HistoryForOneDay;
@@ -8,12 +7,17 @@ using RideTracker.Rides.Synchronization;
 using RideTracker.Stats;
 using RideTracker.Stats.Details;
 using SQLite;
-using DayOfWeek = System.DayOfWeek;
 
 namespace RideTracker.Rides.History;
 
 [QueryProperty(nameof(Date), nameof(Date))]
-public partial class RideHistoryViewModel(ISQLiteAsyncConnection db, RidesSynchronizer ridesSynchronizer, GroupUtils groupUtils, DbLogger<RideDetailsViewModel> logger) : ObservableObject
+public partial class RideHistoryViewModel(
+    ISQLiteAsyncConnection db,
+    RidesSynchronizer ridesSynchronizer,
+    GroupUtils groupUtils,
+    DbLogger<RideDetailsViewModel> logger,
+    SalaryCalculatorService salaryCalculatorService // Injected service
+) : ObservableObject
 {
     [ObservableProperty]
     private List<RideSummary> _rideSummaries;
@@ -38,9 +42,6 @@ public partial class RideHistoryViewModel(ISQLiteAsyncConnection db, RidesSynchr
 
     [ObservableProperty]
     private bool _isGroupAdmin;
-
-    private int BaseSalary => IsItWeekend() ? 1400 : 800;
-    private readonly int _benefitsStartAt = 4000;
 
     public async Task InitializeAsync()
     {
@@ -89,8 +90,8 @@ public partial class RideHistoryViewModel(ISQLiteAsyncConnection db, RidesSynchr
 
             DateFormatted = Date.ToString("dd.MM.yyyy");
             Sum = RideSummaries.Sum(x => x.Cost);
-            Salary = CalculateSalary(Sum);
-            IsSalaryVisible = Salary > BaseSalary && await groupUtils.IsUserManagingCurrentGroupAsync();
+            Salary = salaryCalculatorService.CalculateSalary(Sum, Date);
+            IsSalaryVisible = Sum > 4000 && await groupUtils.IsUserManagingCurrentGroupAsync();
 
             logger.LogInformation($"Data loaded: {RideSummaries.Count} ride summaries found for {DateFormatted}, total cost: {Sum}.");
         }
@@ -130,37 +131,5 @@ public partial class RideHistoryViewModel(ISQLiteAsyncConnection db, RidesSynchr
         {
             { "Period", period }
         });
-    }
-
-    private int CalculateSalary(int sum)
-    {
-        if(sum <= BaseSalary)
-        {
-            return sum;
-        }
-
-        if(sum < _benefitsStartAt)
-        {
-            return BaseSalary;
-        }
-
-        var benefits = 0;
-        var currentLevel = _benefitsStartAt;
-
-        while (currentLevel <= sum)
-        {
-            benefits += 100;
-            currentLevel += 1000;
-        }
-
-        return BaseSalary + benefits;
-    }
-
-    
-
-    private bool IsItWeekend()
-    {
-        var dayOfWeek = Date.DayOfWeek;
-        return dayOfWeek == DayOfWeek.Saturday || dayOfWeek == DayOfWeek.Sunday;
     }
 }

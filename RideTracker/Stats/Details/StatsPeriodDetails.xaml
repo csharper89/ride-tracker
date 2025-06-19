@@ -34,6 +34,10 @@
                 <Label FontSize="Medium" FontAttributes="Bold" Text="{x:Static lang:AppResources.History_TotalSum}"></Label>
                 <Label FontSize="Medium" FontAttributes="Bold" Text="{Binding Total}"></Label>
             </HorizontalStackLayout>
+            <HorizontalStackLayout HorizontalOptions="End" Spacing="10">
+                <Label FontSize="Medium" FontAttributes="Bold" Text="{x:Static lang:AppResources.History_Salary}" />
+                <Label FontSize="Medium" FontAttributes="Bold" Text="{Binding SalaryForPeriod}" />
+            </HorizontalStackLayout>
         </VerticalStackLayout>
     </ScrollView>
 </ContentPage>

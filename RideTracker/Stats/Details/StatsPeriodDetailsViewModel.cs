@@ -1,10 +1,11 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
+using RideTracker.Rides.HistoryForOneDay;
 using SQLite;
 
 namespace RideTracker.Stats.Details;
 
 [QueryProperty(nameof(Period), nameof(Period))]
-public partial class StatsPeriodDetailsViewModel(ISQLiteAsyncConnection db, GroupUtils groupUtils) : ObservableObject
+public partial class StatsPeriodDetailsViewModel(ISQLiteAsyncConnection db, GroupUtils groupUtils, SalaryCalculatorService salaryCalculatorService) : ObservableObject
 {
     [ObservableProperty]
     private List<CarStats> _carStats;
@@ -14,6 +15,9 @@ public partial class StatsPeriodDetailsViewModel(ISQLiteAsyncConnection db, Grou
 
     [ObservableProperty]
     private int _total;
+
+    [ObservableProperty]
+    private int _salaryForPeriod;
 
     public async Task InitializeAsync()
     {
@@ -29,6 +33,7 @@ public partial class StatsPeriodDetailsViewModel(ISQLiteAsyncConnection db, Grou
 
         CarStats = stats.OrderBy(x => x.TotalCost).ToList();
         Total = CarStats.Sum(x => x.TotalCost);
+        SalaryForPeriod = await salaryCalculatorService.CalculateSalaryForPeriodAsync(Period.Start, Period.End);
     }
 
     public static DateTime GetEndOfDay(DateTime dateTime)
